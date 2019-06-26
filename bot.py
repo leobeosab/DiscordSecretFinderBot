@@ -1,24 +1,27 @@
 import discord, os, re
 from modules import helper
 
-client = discord.Client()
+CLIENT = discord.Client()
+FLAG_EMOJI = "\N{eyes}"
 
-@client.event
+@CLIENT.event
 async def on_ready():
-    print("Logged in User: {0.user} | {0.user.id}".format(client))
+    print("Logged in User: {0.user} | {0.user.id}".format(CLIENT))
 
-@client.event
+@CLIENT.event
 async def on_message(message):
+    if message.channel.name == "secret-nazi-log":
+        return
+
     githubString = helper.get_github_string(message.content)
     if githubString is None:
         return
     
     logs = helper.run_truffle_hog(githubString)
-    if logs != "" then:
-        await message.add_reaction("eyes")
-        await message.channel.send("Yo, this is a github link")
-    
+    if logs is not None:
+        await message.add_reaction(FLAG_EMOJI)
+        await helper.message_secret_nazi_channel(message.guild, logs, githubString)
 
-client.run(os.environ["SECRETFINDERBOTTOKEN"])
+CLIENT.run(os.environ["SECRETFINDERBOTTOKEN"])
 
 
