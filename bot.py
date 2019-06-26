@@ -13,7 +13,11 @@ async def on_message(message):
     if githubString is None:
         return
     
-    await message.channel.send("Yo, this is a github link")
+    logs = helper.run_truffle_hog(githubString)
+    if logs != "" then:
+        await message.add_reaction("eyes")
+        await message.channel.send("Yo, this is a github link")
+    
 
 client.run(os.environ["SECRETFINDERBOTTOKEN"])
 
