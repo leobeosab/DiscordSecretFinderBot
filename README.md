@@ -14,3 +14,5 @@ Any Github link that is sent to any text_channel on a server is scanned for open
 1. ```pip3 install truffle-hog, discord```
 2. Make sure discord bot token env var is set ```SECRETFINDERBOTTOKEN=SECRETTOKEN```
 3. ```python3 bot.py ```
+
+Made for 2019 Discord Hack Week :)
