@@ -1,4 +1,5 @@
 import re, subprocess
+from pathlib import Path
 from discord import guild, utils
 
 LOG_DELIM = '\n ------------------------------------------------'
@@ -15,7 +16,8 @@ def get_github_string(data):
 
 # link needs to be https://github.com/user/repo.git
 def run_truffle_hog(githublink):
-    subprocessResult = subprocess.run(['trufflehog', '--include_paths', 'config/include-patterns.config', '--regex', '--entropy=True', githublink], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    pathToRepo = str(Path(__file__).parent.parent.absolute())
+    subprocessResult = subprocess.run(['trufflehog', '--include_paths', pathToRepo+'/config/include-patterns.config', '--regex', '--entropy=True', githublink], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     output = subprocessResult.stdout.decode('utf-8')
 
     if 'Repository not found' in output:
